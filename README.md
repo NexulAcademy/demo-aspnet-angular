@@ -11,9 +11,11 @@ Download DotNet Core SDK here: https://www.microsoft.com/net/download
 Some options require the angular cli to be installed with npm.
 
 Check if it is installed:
+
     > ng -v
 
 install the latest version:
+
     > npm install -g @angular/cli
 
 # simple
