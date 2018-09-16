@@ -8,13 +8,17 @@ using CompanyName.Product.MvcWeb.Models;
 
 namespace CompanyName.Product.MvcWeb.Controllers
 {
+    [Route("home")]
     public class HomeController : Controller
     {
+
+        [Route("")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Route("about")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -22,6 +26,7 @@ namespace CompanyName.Product.MvcWeb.Controllers
             return View();
         }
 
+        [Route("contact")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -29,11 +34,13 @@ namespace CompanyName.Product.MvcWeb.Controllers
             return View();
         }
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Route("error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
