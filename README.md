@@ -6,6 +6,7 @@ Integration Options for an Angular front-end and an ASP.Net Core MVC back-end AP
 These solutions require Node/Npm and ASP.Net Core 2.1 SDK and Visual Studio 2017 (15.7, any edition) to be installed on the developer machine.
 
 Download node/npm here: https://nodejs.org/en/download/
+
 Download DotNet Core SDK here: https://www.microsoft.com/net/download
 
 Some options require the angular cli to be installed with npm.
