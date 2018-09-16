@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +38,9 @@ namespace CompanyName.Product.MvcWeb
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {   // middleware runs in order specified (top to bottom) on request 
+            //  - until a piece of middle ware 'handles' the request
+            // then middleware runs in reverse order (bottom to top) with the response pipeline
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,15 +52,26 @@ namespace CompanyName.Product.MvcWeb
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
+            // 3) if 1 & 2 failed, and not an API request, run angular app for this route
+            app.Use(async (context, next) =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                await next(); // anything after this line runs on response pipeline only
+                if (context.Response.StatusCode == 404
+                    && !Path.HasExtension(context.Request.Path.Value)
+                    && !context.Request.Path.Value.StartsWith("/api/"))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
             });
+
+            // 1) try to run MVC controller actions for exact route matches
+            app.UseMvcWithDefaultRoute();
+
+            // 2) fallback to any static files that match the current requested route
+            app.UseFileServer();
         }
     }
 }
