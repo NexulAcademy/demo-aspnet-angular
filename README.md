@@ -1,3 +1,7 @@
+THIS project uses out of date references. The concepts are still valid in May 2021, but some details have changed.  The Nexul Academy courseware is more up to date.
+
+https://www.nexulacademy.com/courseware/
+
 # demo-aspnet-angular
 Integration Options for an Angular front-end and an ASP.Net Core MVC back-end API
 
